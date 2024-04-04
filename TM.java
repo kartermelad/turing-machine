@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The turing machine
+ * The Turing Machine
  * 
  * @author Karter Melad & Hunter Walp
  * @version Spring 2024
