@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Karter Melad & Hunter Walp
  * @version Spring 2024
  */
-public class TM {
+public class TM implements TMInterface {
     protected Map<Pair, Transition> transitions = new HashMap<>();
     protected TMTape tape = new TMTape();
     protected TMState currentState;

@@ -15,14 +15,26 @@ public class Transition {
         this.moveDirection = moveDirection;
     }
 
+    /**
+     * Gets the next state
+     * @return next state
+     */
     public int getNextState() {
         return nextState;
     }
 
+    /**
+     * Gets the symbol
+     * @return symbol
+     */
     public int getWriteSymbol() {
         return writeSymbol;
     }
 
+    /**
+     * Gets the move direction
+     * @return direction
+     */
     public String getMoveDirection() {
         return moveDirection;
     }
