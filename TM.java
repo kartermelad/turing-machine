@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,16 +10,20 @@ import java.util.Map;
  * @author Karter Melad & Hunter Walp
  * @version Spring 2024
  */
-public class TuringMachine {
-    Map<Pair, Transition> transitions = new HashMap<>();
-    List<Integer> tape = new LinkedList<>();
-    int currentState = 0;
-    int head = 0;
+public class TM {
+    private Map<Pair, Transition> transitions = new HashMap<>();
+    private TMTape tape = new TMTape();
+    private TMState currentState;
+    private TMState finalState;
+    private int head = 0;
+    
 
     public void loadFromFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         int numStates = Integer.parseInt(reader.readLine());
         int numSymbols = Integer.parseInt(reader.readLine());
+        currentState = new TMState(0, null);
+        finalState = new TMState(numStates - 1, null);
         for (int state = 0; state < numStates - 1; state++) {
             for (int symbol = 0; symbol <= numSymbols; symbol++) {
                 String[] parts = reader.readLine().split(",");
@@ -40,15 +42,15 @@ public class TuringMachine {
     }
 
     public void start() {
-        while (currentState != transitions.size() / 2) {
+        while (currentState.getState() != finalState.getState()) {
             int currentSymbol = tape.get(head);
-            Transition transition = transitions.get(new Pair(currentState, currentSymbol));
+            Transition transition = transitions.get(new Pair(currentState.getState(), currentSymbol));
             if (transition == null) {
                 return;
             }
-            tape.set(head, transition.writeSymbol);
-            currentState = transition.nextState;
-            if (transition.moveDirection.equals("R")) {
+            tape.set(head, transition.getWriteSymbol());
+            currentState = new TMState(transition.getNextState(), transition);
+            if (transition.getMoveDirection().equals("R")) {
                 head += 1;
             } else {
                 head -= 1;
@@ -63,9 +65,6 @@ public class TuringMachine {
     }
 
     public void printTape() {
-        for (int symbol : tape) {
-            System.out.print(symbol);
-        }
-        System.out.println();
+        tape.print();
     }
 }

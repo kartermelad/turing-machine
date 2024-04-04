@@ -14,4 +14,16 @@ public class Transition {
         this.writeSymbol = writeSymbol;
         this.moveDirection = moveDirection;
     }
+
+    public int getNextState() {
+        return nextState;
+    }
+
+    public int getWriteSymbol() {
+        return writeSymbol;
+    }
+
+    public String getMoveDirection() {
+        return moveDirection;
+    }
 }

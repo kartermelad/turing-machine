@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class TMSimulator {
     public static void main(String[] args) throws IOException {
-        TuringMachine tm = new TuringMachine();
+        TM tm = new TM();
         tm.loadFromFile(args[0]);
         long startTime = System.nanoTime();
         tm.start();
