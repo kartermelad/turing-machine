@@ -11,13 +11,12 @@ import java.util.Map;
  * @version Spring 2024
  */
 public class TM {
-    private Map<Pair, Transition> transitions = new HashMap<>();
-    private TMTape tape = new TMTape();
-    private TMState currentState;
-    private TMState finalState;
-    private int head = 0;
+    protected Map<Pair, Transition> transitions = new HashMap<>();
+    protected TMTape tape = new TMTape();
+    protected TMState currentState;
+    protected TMState finalState;
+    protected int head = 0;
     
-
     public void loadFromFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         int numStates = Integer.parseInt(reader.readLine());
