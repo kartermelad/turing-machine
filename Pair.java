@@ -15,7 +15,11 @@ public class Pair {
         this.symbol = symbol;
     }
 
-    @Override
+   /**
+    * Checks if this pair is equal to another object
+    * @param o
+    * @return true if equal
+    */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -27,7 +31,10 @@ public class Pair {
         return state == pair.state && symbol == pair.symbol;
     }
 
-    @Override
+    /**
+     * Returns a hash code value for the pair
+     * @return hashcode value
+     */
     public int hashCode() {
         return Objects.hash(state, symbol);
     }
