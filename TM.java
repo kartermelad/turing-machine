@@ -17,6 +17,7 @@ public class TM implements TMInterface {
     protected TMState finalState;
     protected int head = 0;
     
+    @Override
     public void loadFromFile(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         int numStates = Integer.parseInt(reader.readLine());
@@ -40,6 +41,7 @@ public class TM implements TMInterface {
         reader.close();
     }
 
+    @Override
     public void start() {
         while (currentState.getState() != finalState.getState()) {
             int currentSymbol = tape.get(head);
@@ -63,6 +65,7 @@ public class TM implements TMInterface {
         }
     }
 
+    @Override
     public void printTape() {
         tape.print();
     }
