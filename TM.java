@@ -32,38 +32,35 @@ public class TM implements TMInterface {
         }
         String input = reader.readLine();
         if (input != null && !input.isEmpty()) {
-            for (char c : input.toCharArray()) {
-                tape.add(Character.getNumericValue(c));
+            for (int i = 0; i < input.length(); i++) {
+                tape.add(i, Character.getNumericValue(input.charAt(i)));
             }
         } else {
-            tape.add(0);  // Add a default symbol to the tape
+            tape.add(0,0);  // Add a default symbol to the tape
         }
         reader.close();
     }
 
     @Override
-    public void start() {
-        while (currentState.getState() != finalState.getState()) {
-            int currentSymbol = tape.get(head);
-            Transition transition = transitions.get(new Pair(currentState.getState(), currentSymbol));
-            if (transition == null) {
-                return;
-            }
-            tape.set(head, transition.getWriteSymbol());
-            currentState = new TMState(transition.getNextState(), transition);
-            if (transition.getMoveDirection().equals("R")) {
-                head += 1;
-            } else {
-                head -= 1;
-            }
-            if (head < 0) {
-                tape.add(0, 0);
-                head = 0;
-            } else if (head == tape.size()) {  // Only expand the tape when the head is at the end
-                tape.add(0);  // Add a single 0 to the tape
-            }
+public void start() {
+    while (currentState.getState() != finalState.getState()) {
+        int currentSymbol = tape.get(head);
+        Transition transition = transitions.get(new Pair(currentState.getState(), currentSymbol));
+        if (transition == null) {
+            return;
+        }
+        tape.set(head, transition.getWriteSymbol());
+        currentState = new TMState(transition.getNextState(), transition);
+        if (transition.getMoveDirection().equals("R")) {
+            head += 1;
+        } else {
+            head -= 1;
+        }
+        if (head >= tape.size() || head < -tape.size()) {  // Expand the tape when the head is at the end or beginning
+            tape.add(head, 0);  // Add a single 0 to the tape
         }
     }
+}
 
     @Override
     public void printTape() {

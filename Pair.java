@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 /**
  * Holds the state and symbol
  * 
@@ -36,6 +34,9 @@ public class Pair {
      * @return hashcode value
      */
     public int hashCode() {
-        return Objects.hash(state, symbol);
+        int result = 17;
+        result = 31 * result + state;
+        result = 31 * result + symbol;
+        return result;
     }
 }
