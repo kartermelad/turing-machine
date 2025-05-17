@@ -1,8 +1,6 @@
-# Project #3: Turing Machine
+# Turing Machine
 
 * Author: Karter Melad & Hunter Walp
-* Class: CS361 Section #002
-* Semester: Spring 2024
 
 ## Overview
 
